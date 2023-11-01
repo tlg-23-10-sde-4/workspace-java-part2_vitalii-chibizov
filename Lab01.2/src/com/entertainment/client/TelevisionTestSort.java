@@ -2,7 +2,11 @@ package com.entertainment.client;
 
 import java.util.Arrays;
 import java.util.List;
+
 import com.entertainment.Television;
+import com.entertainment.TelevisionBrandChannelComparator;
+import com.entertainment.TelevisionBrandComparator;
+import com.entertainment.TelevisionChannelComparator;
 
 public class TelevisionTestSort {
 
@@ -11,25 +15,26 @@ public class TelevisionTestSort {
         List<Television> tvList = createTelevisionList();
 
         // sort by natural order and print
-        tvList.sort(null);
-
+        tvList.sort(new TelevisionBrandComparator());
         System.out.println("Sorted by brand (natural order)");
-        for (Television tv : tvList) {
-            System.out.println(tv);
-        }
-        System.out.println();
+        Television.dump(tvList);
+        System.out.println("-----------------------");
 
-    /* TODO: uncomment this to test your comparator class
-    // sort by supplied Comparator and print
-    tvList.sort(new TelevisionChannelComparator());
 
-    System.out.println("Sorted by channel");
-    for (Television tv : tvList) {
-      System.out.println(tv);
+        // sort by supplied Comparator and print
+        tvList.sort(new TelevisionChannelComparator());
+        System.out.println("Sorted by channel");
+        Television.dump(tvList);
+        System.out.println("-----------------------");
+
+        // sort by supplied Comparator and print
+        tvList.sort(new TelevisionBrandChannelComparator());
+        System.out.println("Sorted by brand, if tied then by channel");
+        Television.dump(tvList);
+        System.out.println("-----------------------");
     }
-    System.out.println();
-    */
-    }
+
+
 
     // dataset for testing
     private static List<Television> createTelevisionList() {
